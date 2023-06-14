@@ -74,6 +74,7 @@ import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragmentS
 import com.android.systemui.statusbar.policy.AospPolicyModule;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
+import com.android.systemui.statusbar.policy.FlashlightModule;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyController;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyControllerImpl;
 import com.android.systemui.statusbar.policy.SensorPrivacyController;
@@ -119,6 +120,7 @@ import javax.inject.Named;
         CollapsedStatusBarFragmentStartableModule.class,
         ConnectingDisplayViewModel.StartableModule.class,
         DefaultBlueprintModule.class,
+        FlashlightModule.class,
         GestureModule.class,
         HeadsUpModule.class,
         KeyboardShortcutsModule.class,
