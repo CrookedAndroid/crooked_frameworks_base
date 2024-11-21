@@ -889,8 +889,22 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
         mKeyguardIndicationController.init();
 
         mColorExtractor.addOnColorsChangedListener(mOnColorsChangedListener);
-        
+
         mTunerService.addTunable(this, QS_TRANSPARENCY);
+
+        ContentObserver contentObserver = new ContentObserver(null) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                if (uri.equals(Settings.System.getUriFor(Settings.System.QS_TRANSPARENCY))) {
+                    int transparencyAlpha =
+                            Settings.System.getInt(mContext.getContentResolver(), Settings.System.QS_TRANSPARENCY, 100);
+                    mScrimController.setCustomScrimAlpha(transparencyAlpha);
+                }
+            }
+        };
+        mContext.getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.QS_TRANSPARENCY), false, contentObserver);
+        contentObserver.onChange(true, Settings.System.getUriFor(Settings.System.QS_TRANSPARENCY));
 
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 
