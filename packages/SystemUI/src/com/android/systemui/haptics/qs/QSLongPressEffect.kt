@@ -96,7 +96,11 @@ constructor(
                 effectDuration,
             )
         vibratorHelper?.cancel()
-        vibrate(effect)
+        if (vibratorHelper != null && effect != null) {
+            vibrate(effect)
+        } else {
+            LongPressHapticBuilderAlt.createReversedEffectAlt(pausedProgress)
+        }
     }
 
     private fun vibrate(effect: VibrationEffect?) {
@@ -143,7 +147,11 @@ constructor(
     fun handleAnimationStart() {
         logEvent(qsTile?.tileSpec, state, "animation started")
         if (state == State.TIMEOUT_WAIT) {
-            vibrate(longPressHint)
+            if (vibratorHelper != null && longPressHint != null) {
+                vibrate(longPressHint)
+            } else {
+                LongPressHapticBuilderAlt.createLongPressHintAlt()
+            }
             setState(State.RUNNING_FORWARD)
         }
     }
@@ -159,12 +167,20 @@ constructor(
                     setState(State.IDLE)
                     logEvent(qsTile?.tileSpec, state, "false long click. No action triggered")
                 } else if (keyguardStateController.isUnlocked) {
-                    vibrate(snapEffect)
+                    // if (vibratorHelper != null && effect != null) {
+                        // vibrate(snapEffect)
+                    // } else {
+                        LongPressHapticBuilderAlt.createSnapEffectAlt()
+                    // } // This check is bad.
                     setState(State.LONG_CLICKED)
                     qsTile?.longClick(expandable)
                     logEvent(qsTile?.tileSpec, state, "long click action triggered")
                 } else {
-                    vibrate(snapEffect)
+                    // if (vibratorHelper != null && effect != null) {
+                        // vibrate(snapEffect)
+                    // } else {
+                        LongPressHapticBuilderAlt.createSnapEffectAlt()
+                    // } // This check is bad.
                     callback?.onResetProperties()
                     setState(State.IDLE)
                     qsTile?.longClick(expandable)
