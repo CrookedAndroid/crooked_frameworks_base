@@ -193,7 +193,6 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
             FooterActionsController footerActionsController,
             FooterActionsViewModel.Factory footerActionsViewModelFactory,
             LargeScreenShadeInterpolator largeScreenShadeInterpolator,
-            SecureLockscreenQSDisabler secureLockscreenQSDisabler,
             TunerService tunerService) {
         mRemoteInputQuickSettingsDisabler = remoteInputQsDisabler;
         mQsMediaHost = qsMediaHost;
@@ -211,7 +210,6 @@ public class QSImpl implements QS, CommandQueue.Callbacks, StatusBarStateControl
         if (SceneContainerFlag.isEnabled()) {
             mStatusBarState = StatusBarState.SHADE;
         }
-        mSecureLockscreenQSDisabler = secureLockscreenQSDisabler;
         mTunerService = tunerService;
     }
 
